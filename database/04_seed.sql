@@ -1,0 +1,12 @@
+INSERT INTO mfs_roles(role_id, role_code, role_name) VALUES(1, 'ADMIN', 'Administrator');
+INSERT INTO mfs_roles(role_id, role_code, role_name) VALUES(2, 'SELLER', 'Seller');
+INSERT INTO mfs_roles(role_id, role_code, role_name) VALUES(3, 'BUYER', 'Buyer');
+INSERT INTO mfs_categories(category_id, category_name) VALUES(1, 'Electronics');
+INSERT INTO mfs_categories(category_id, category_name) VALUES(2, 'Clothes');
+INSERT INTO mfs_categories(category_id, category_name) VALUES(3, 'Home and Kitchen');
+INSERT INTO mfs_categories(category_id, category_name) VALUES(4, 'Sport');
+INSERT INTO mfs_categories(category_id, category_name) VALUES(5, 'Beauty');
+INSERT INTO mfs_users(user_id, role_id, full_name, email, password_hash) VALUES(1, 1, 'Alina Admin', 'admin@platform.local', 'admin123');
+INSERT INTO mfs_users(user_id, role_id, full_name, email, password_hash) VALUES(2, 2, 'Marat Store', 'seller@platform.local', 'seller123');
+INSERT INTO mfs_users(user_id, role_id, full_name, email, password_hash) VALUES(3, 3, 'Diana Buyer', 'buyer@platform.local', 'buyer123');
+COMMIT;

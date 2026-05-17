@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Management Feedback system</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="Приглашение.html"><span class="brand-mark">M</span><span>Management Feedback</span></a>
+        <nav class="site-nav">
+          <a href="Приглашение.html">Главная</a>
+          <a href="buyer.html">Каталог</a>
+          <a href="database.html">Database</a>
+        </nav>
+        <form class="site-search" action="search.html" method="get">
+          <input class="site-search-input" type="search" name="q" placeholder="Поиск товаров, продавцов, категорий" />
+          <button class="button secondary site-search-button" type="submit">Найти</button>
+        </form>
+        <div class="site-actions">
+          <details class="login-menu">
+            <summary>Войти</summary>
+            <div class="login-menu-panel">
+              <a href="buyer-login.html">Покупатель</a>
+              <a href="seller-login.html">Продавец</a>
+              <a href="admin-login.html">Админ</a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <section class="hero">
+        <div class="hero-top">
+          <div class="eyebrow">Многосстраничная demo-платформа</div>
+          <div class="badge buyer" data-session-badge>Гость</div>
+        </div>
+        <h1>Management Feedback system</h1>
+        <p class="lead">Система ролей, товаров, отзывов, поиска и Oracle database-слоя для финального проекта.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="admin-login.html">Вход администратора</a>
+          <a class="button secondary" href="seller-login.html">Вход продавца</a>
+          <a class="button secondary" href="buyer-login.html">Вход покупателя</a>
+          <a class="button secondary" href="database.html">Database Dashboard</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <aside class="stack">
+          <div class="panel">
+            <div class="section-head"><h2>Окна входа</h2><span class="muted small">Три роли, три отдельных сценария</span></div>
+            <div id="roleList" class="stack"></div>
+          </div>
+          <div class="panel">
+            <div class="section-head"><h2>Статистика</h2><span class="muted small">Общая база demo-данных</span></div>
+            <div class="cards">
+              <div class="stat"><div class="muted small">Всего товаров</div><strong id="statProducts">0</strong></div>
+              <div class="stat"><div class="muted small">Всего отзывов</div><strong id="statFeedbacks">0</strong></div>
+              <div class="stat"><div class="muted small">Без ответа</div><strong id="statPending">0</strong></div>
+            </div>
+          </div>
+        </aside>
+        <main class="stack">
+          <div class="panel">
+            <div class="section-head">
+              <div>
+                <h2>Структура страниц</h2>
+                <div class="muted small">Отдельные экраны вместо одного общего окна</div>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="info-card"><strong>Админ</strong><div class="muted">admin-login.html → admin.html</div></div>
+              <div class="info-card"><strong>Продавец</strong><div class="muted">seller-login.html → seller.html</div></div>
+              <div class="info-card"><strong>Покупатель</strong><div class="muted">buyer-login.html → buyer.html → review.html</div></div>
+              <div class="info-card"><strong>Поиск</strong><div class="muted">search.html — глобальный поиск по товарам, продавцам и категориям.</div></div>
+            </div>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+      const state = loadState();
+      setupNav(state);
+      renderRoleCards(document.getElementById("roleList"), state);
+      renderStats(state, { products: document.getElementById("statProducts"), feedbacks: document.getElementById("statFeedbacks"), pending: document.getElementById("statPending") });
+    </script>
+  </body>
+</html>
