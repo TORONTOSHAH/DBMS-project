@@ -159,7 +159,6 @@ ALTER TRIGGER "TRG_CUSTOMER_VALIDATE_EMAIL" ENABLE;
     BEFORE INSERT ON FEEDBACK
     FOR EACH ROW
 BEGIN
-    -- Авто приоритет если не указан
     IF :NEW.PRIORITY IS NULL THEN
         :NEW.PRIORITY := CASE
             WHEN :NEW.RATING = 1 THEN 'Critical'
@@ -169,7 +168,6 @@ BEGIN
         END;
     END IF;
 
-    -- Авто дата если не указана
     IF :NEW.FEEDBACKDATE IS NULL THEN
         :NEW.FEEDBACKDATE := SYSDATE;
     END IF;
@@ -246,7 +244,6 @@ FOR EACH ROW
 DECLARE
     v_count NUMBER;
 BEGIN
-    -- Проверяем существует ли feedback
     SELECT COUNT(*)
     INTO v_count
     FROM FEEDBACK
@@ -506,7 +503,6 @@ create or replace TRIGGER trg_feedback_auto_priority
     BEFORE INSERT ON FEEDBACK
     FOR EACH ROW
 BEGIN
-    -- Авто приоритет если не указан
     IF :NEW.PRIORITY IS NULL THEN
         :NEW.PRIORITY := CASE
             WHEN :NEW.RATING = 1 THEN 'Critical'
@@ -516,7 +512,6 @@ BEGIN
         END;
     END IF;
 
-    -- Авто дата если не указана
     IF :NEW.FEEDBACKDATE IS NULL THEN
         :NEW.FEEDBACKDATE := SYSDATE;
     END IF;
@@ -580,7 +575,6 @@ FOR EACH ROW
 DECLARE
     v_count NUMBER;
 BEGIN
-    -- Проверяем существует ли feedback
     SELECT COUNT(*)
     INTO v_count
     FROM FEEDBACK
@@ -635,7 +629,6 @@ ALTER TRIGGER "TRG_CUSTOMER_VALIDATE_EMAIL" ENABLE;
     BEFORE INSERT ON FEEDBACK
     FOR EACH ROW
 BEGIN
-    -- Авто приоритет если не указан
     IF :NEW.PRIORITY IS NULL THEN
         :NEW.PRIORITY := CASE
             WHEN :NEW.RATING = 1 THEN 'Critical'
@@ -644,8 +637,6 @@ BEGIN
             ELSE 'Low'
         END;
     END IF;
-
-    -- Авто дата если не указана
     IF :NEW.FEEDBACKDATE IS NULL THEN
         :NEW.FEEDBACKDATE := SYSDATE;
     END IF;
@@ -679,7 +670,6 @@ BEGIN
 END;
 /
 ALTER TRIGGER "TRG_FEEDBACK_VALIDATE_RATING" ENABLE;
-
   CREATE OR REPLACE EDITIONABLE TRIGGER "TRG_PRODUCT_VALIDATE_PRICE" 
 BEFORE INSERT OR UPDATE ON PRODUCTS
 FOR EACH ROW
@@ -714,7 +704,6 @@ FOR EACH ROW
 DECLARE
     v_count NUMBER;
 BEGIN
-    -- Проверяем существует ли feedback
     SELECT COUNT(*)
     INTO v_count
     FROM FEEDBACK
@@ -798,7 +787,6 @@ ALTER TRIGGER "TRG_CUSTOMER_VALIDATE_EMAIL" ENABLE;
     BEFORE INSERT ON FEEDBACK
     FOR EACH ROW
 BEGIN
-    -- Авто приоритет если не указан
     IF :NEW.PRIORITY IS NULL THEN
         :NEW.PRIORITY := CASE
             WHEN :NEW.RATING = 1 THEN 'Critical'
@@ -808,7 +796,6 @@ BEGIN
         END;
     END IF;
 
-    -- Авто дата если не указана
     IF :NEW.FEEDBACKDATE IS NULL THEN
         :NEW.FEEDBACKDATE := SYSDATE;
     END IF;
@@ -883,7 +870,6 @@ FOR EACH ROW
 DECLARE
     v_count NUMBER;
 BEGIN
-    -- Проверяем существует ли feedback
     SELECT COUNT(*)
     INTO v_count
     FROM FEEDBACK
