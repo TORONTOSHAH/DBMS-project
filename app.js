@@ -1,7 +1,5 @@
 const STORAGE_KEY = "mfs-project-v1";
-
 const categories = ["Электроника", "Одежда", "Дом и кухня", "Спорт", "Красота"];
-
 const roleMeta = {
   admin: { label: "Админ", dashboard: "admin.html", login: "admin-login.html", hint: "admin@platform.local / admin123" },
   seller: { label: "Продавец", dashboard: "seller.html", login: "seller-login.html", hint: "seller@platform.local / seller123" },
@@ -19,7 +17,6 @@ function buildDemoProducts() {
 
   const products = [];
   let counter = 1;
-
   categories.forEach((category) => {
     const template = templates[category];
     for (let i = 1; i <= 50; i += 1) {
@@ -36,7 +33,6 @@ function buildDemoProducts() {
       counter += 1;
     }
   });
-
   return products;
 }
 
@@ -55,7 +51,6 @@ const demoState = {
 };
 
 function cloneDemoState() { return JSON.parse(JSON.stringify(demoState)); }
-
 function loadState() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) {
@@ -89,7 +84,6 @@ function setSessionBadge(state, element) {
   element.className = "badge " + (user ? user.role : "buyer");
   element.textContent = "Management Feedback system";
 }
-
 function renderRoleCards(container, state) {
   const activeUser = currentUser(state);
   container.innerHTML = "";
@@ -113,7 +107,6 @@ function renderRoleCards(container, state) {
     container.appendChild(card);
   });
 }
-
 function renderStats(state, elements) {
   elements.products.textContent = state.products.length;
   elements.feedbacks.textContent = state.feedbacks.length;
@@ -140,7 +133,6 @@ function requireRole(state, role) {
   }
   return user;
 }
-
 function loginForRole(state, role, email, password) {
   const account = state.users.find((user) => user.role === role && user.email.toLowerCase() === email.toLowerCase() && user.password === password);
   if (!account) return false;
@@ -158,18 +150,15 @@ function visibleFeedbacks(state, role, userId) {
   }
   return state.feedbacks.filter((feedback) => feedback.buyerId === userId);
 }
-
 function productAverageRating(state, productId) {
   const productFeedbacks = state.feedbacks.filter((feedback) => feedback.productId === productId);
   if (!productFeedbacks.length) return 0;
   return productFeedbacks.reduce((sum, item) => sum + item.rating, 0) / productFeedbacks.length;
 }
-
 function filterProducts(state, options = {}) {
   const { category = "all", search = "", minPrice = "", maxPrice = "", stockFilter = "all", sort = "default", limitToSellerId = null } = options;
   const minPriceValue = minPrice === "" ? null : Number(minPrice);
   const maxPriceValue = maxPrice === "" ? null : Number(maxPrice);
-
   const products = state.products.filter((product) => {
     if (limitToSellerId && product.sellerId !== limitToSellerId) return false;
     const seller = sellerById(state, product.sellerId);
@@ -182,7 +171,6 @@ function filterProducts(state, options = {}) {
     const matchesStock = stockFilter === "all" || (stockFilter === "available" && stockQty > 0) || (stockFilter === "low" && stockQty > 0 && stockQty <= 5);
     return matchesCategory && matchesSearch && matchesMinPrice && matchesMaxPrice && matchesStock;
   });
-
   products.sort((a, b) => {
     if (sort === "priceAsc") return a.price - b.price;
     if (sort === "priceDesc") return b.price - a.price;
@@ -193,7 +181,6 @@ function filterProducts(state, options = {}) {
 
   return products;
 }
-
 function renderProductsList(state, container, options = {}) {
   const { showReviewButton = false, reviewPage = "review.html" } = options;
   const products = filterProducts(state, options);
@@ -202,7 +189,6 @@ function renderProductsList(state, container, options = {}) {
     container.innerHTML = '<div class="empty">По текущим фильтрам товары не найдены.</div>';
     return;
   }
-
   products.forEach((product) => {
     const productFeedbacks = state.feedbacks.filter((feedback) => feedback.productId === product.id);
     const avg = productFeedbacks.length ? (productFeedbacks.reduce((sum, item) => sum + item.rating, 0) / productFeedbacks.length).toFixed(1) : "Нет";
